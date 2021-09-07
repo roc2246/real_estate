@@ -1,0 +1,45 @@
+/*Top Content*/
+#flex-top{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*Header*/
+header>h1{
+    margin-top: 0px;
+}
+
+header>h4{
+    margin-top: -20px;
+}
+
+header>h1, header>h4, li{
+    font-family: century, 'Times New Roman', Times, serif;
+}
+
+/*Navigation*/
+nav{
+    margin-top: 20px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: inline;
+    font-size: 14pt;
+    margin: 10px;
+}
+
+/*Main Content*/
+main{
+    border-top: solid;
+    border-bottom: solid;
+    height: 600px;/*Delete Later*/
+}
+
+main>h1{
+    text-align: center;
+}
