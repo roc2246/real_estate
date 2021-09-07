@@ -9,10 +9,9 @@
 
 
 <script>
-    //Use promises
- window.setInterval("changeImage()", 3000);
+ window.setInterval("changeImage()", 2500);
  let images=["1", "2", "3", "4"];
- let changeImage = () =>{
+ const changeImage = () =>{
     document.getElementById("test").innerHTML = images[Math.floor(Math.random() * images.length)];
  
 }
