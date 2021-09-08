@@ -1,21 +1,19 @@
 <?php $pageTitle = 'Home'; ?>
 <?php include 'include/header.php';?>
 <!--
+<h1>Your new dream home awaits...</h1>
+
 -->
 <button onclick="changeImage()">TEST</button>
 
 <main>
 <div id="changing-image4">
-<h1>Your new dream home awaits...</h1>
 </div>
 <div id="changing-image3">
-<h1>Your new dream home awaits...</h1>
 </div>
 <div id="changing-image2">
-<h1>Your new dream home awaits...</h1>
 </div>
 <div id="changing-image">
-<h1>Your new dream home awaits...</h1>
 </div>
 
 </main>
@@ -53,7 +51,7 @@ document.getElementById("changing-image4").style.backgroundImage = "url(backgrou
     var w2 = elem2.offsetWidth;
     var w3 = elem3.offsetWidth;
     var w4 = elem4.offsetWidth;
-    var vanishPoint = 1100;
+    var vanishPoint = 1527;
    clearInterval(id);
    id = setInterval(frame, time);
     function frame(){
@@ -92,6 +90,7 @@ document.getElementById("changing-image4").style.backgroundImage = "url(backgrou
       pos2++; 
       pos3++; 
       pos4++; 
+      //Sets position of each photo
       elem.style.left = pos + "px";
       elem2.style.left = pos2 + "px";
       elem3.style.left = pos3 + "px";

@@ -46,6 +46,7 @@ main{
 #changing-image, #changing-image2, #changing-image3, #changing-image4{
     height: 600px;/*Delete Later*/
     position: absolute;
+    width: 500px;
 }
 
 main>h1{
