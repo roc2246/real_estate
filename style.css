@@ -39,8 +39,14 @@ main{
     border-bottom: solid;
     height: 600px;/*Delete Later*/
     font-family: Georgia, 'Times New Roman', Times, serif;
+
+    position: relative;
 }
 
+#changing-image, #changing-image2, #changing-image3, #changing-image4{
+    height: 600px;/*Delete Later*/
+    position: absolute;
+}
 
 main>h1{
     text-align: center;
