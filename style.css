@@ -43,10 +43,10 @@ main{
     position: relative;
 }
 
-#changing-image, #changing-image2, #changing-image3, #changing-image4{
+.changing-image{
     height: 600px;/*Delete Later*/
     position: absolute;
-    width: 500px;
+    width: 500px;/*Delete Later*/
 }
 
 main>h1{
