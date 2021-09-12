@@ -11,33 +11,48 @@
 
 
 <script>
-var images = [];
+//Stores variables to manage slideshow
+var vanishPoint = 0;
+var time = 5;
+var imgWidth = 1905;
+var w= [];//stores width of each image
+var pos = [];//stores initial position of each image
 
 //Stores images for slideshow
-images[0] = "glasses-and-hat.jpg";
-images[1] = "5-1ANSWERS.png";
-images[2] = "5-2ANSWERS.png";
-images[3] = "5-3ANSWERS.png";
+var images = [];
+images[0] = "1.png";
+images[1] = "2.png";
+images[2] = "3.png";
+images[3] = "4.png";
 
-//Creates elements for each slideshow image
-for (let i=0; i<images.length; i++){
+
+
+//Creates new image
+const newImg = (no) => {
     const image = document.createElement("div");
     image.className = "changing-image";
-    image.style.backgroundImage = "url(background-images/"+images[i] +")";
+    image.style.backgroundImage = "url(background-images/"+images[no] +")";
     document.getElementsByTagName("main")[0].appendChild(image);  
+    document.getElementsByClassName("changing-image")[no].style.width = imgWidth + "px";
 }
 
+//Stores slideshgow image containers
+const elem = document.getElementsByClassName("changing-image");
+
+//Sets the first image
+//newImg(0);
+
+for(let i = 0; i<images.length; i++){
+  newImg(i);
+}
+          
+
 const changeImage = () =>{
-  const elem = document.getElementsByClassName("changing-image");
-  var vanishPoint = 1400;
-  var time = 5;
-  var w= [];
   //Initial position of eack element
-  var pos = [];
   pos[0] = 0;
-  pos[1] = -1000;
-  pos[2] = -2000;
-  pos[3] = -3000; 
+  pos[1] = -1800;
+  pos[2] = -3700;
+  pos[3] = -5600; 
   /////////////////////////////////
   for (let i = 0; i<elem.length; i++){
     //Assignes order for images in slideshow
@@ -61,6 +76,12 @@ const changeImage = () =>{
     }
 }
 
+
+          
+    //Creates new image once previous one starts to dissaspear
+  /*  if(elem[i].offsetWidth < imgWidth){
+            newImg(1);
+          }*/
 </script>
 <?php include 'include/footer.php'; ?>
 
