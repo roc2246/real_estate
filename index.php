@@ -4,7 +4,7 @@
 <h1>Your new dream home awaits...</h1>
 
 -->
-<button onclick="changeImage()">TEST</button>
+<button onclick="setInterval(frame, time)">TEST</button>
 
 <main>
 </main>
@@ -49,35 +49,29 @@ for(let i = 0; i<images.length; i++){
   newImg(i);
 }
           
-
-const changeImage = () =>{
+const frame = () =>{
   for (let i = 0; i<elem.length; i++){
-    elem[i].style.left = pos[i] + "px";
     w.push(elem[i].offsetWidth);
-  }
-  setInterval(frame, time);
-  function frame(){
-    for (let i = 0; i<elem.length; i++){
-      if (pos[i] >vanishPoint){
-        w[i]--;
-        elem[i].style.width = w[i] + "px";
-        //REsets image size one image dissapears
-        if(elem[i].style.width == "0px"){
-          alert("TEST");//Debugg  
-          elem[i].style.width = imgWidth +"px";
-        }
+    elem[i].style.left = pos[i] + "px";
+    if (pos[i] >vanishPoint){
+      w[i]--;
+      elem[i].style.width = w[i] + "px";
+      if(w[i] == 0){
+         //elem[i].style.width = imgWidth +"px";
+         w[i] = imgWidth;
+      elem[i].style.width = w[i] + "px";
+
       }
-        elem[i].style.left = pos[i] + "px";
-        if(elem[i].style.left == imgWidth + "px"){ 
-          elem[i].style.left = lastPic + "px";
-          pos[i] = lastPic;
-          pos[i]++;
-        } else { 
-          pos[i]++;
-        }
+    }
+    if(elem[i].style.left == imgWidth + "px"){ 
+      elem[i].style.left = lastPic + "px";
+      pos[i] = lastPic;
+      pos[i]++;
+    } else { 
+      pos[i]++;
     }
   }
-}        
+}
 </script>
 <?php include 'include/footer.php'; ?>
 
