@@ -33,6 +33,12 @@ li{
     margin: 10px;
 }
 
+a{
+    text-decoration: none;
+}
+
+
+
 /*Main Content*/
 main{
     border-top: solid;

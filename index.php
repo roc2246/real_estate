@@ -1,19 +1,21 @@
 <?php $pageTitle = 'Home'; ?>
 <?php include 'include/header.php';?>
 <!--
-<h1>Your new dream home awaits...</h1>
+  Elements used for later or debugging
+<button onclick="slideshow()">TEST</button>
 
 -->
-<button onclick="setInterval(frame, time)">TEST</button>
-
+<p id="timer"></p>
 <main>
+<h1>Your new dream home awaits...</h1>
+
 </main>
 
 
 <script>
 //Stores variables to manage slideshow
 var vanishPoint = 0;
-var time = 1;
+var time = 10;
 var imgWidth = 1905;
 var lastPic = -5600;
 var w= [];//stores width of each image
@@ -48,7 +50,36 @@ const newImg = (no) => {
 for(let i = 0; i<images.length; i++){
   newImg(i);
 }
-          
+
+//Sets timer so slideshow can pause
+/* let start = () => {
+      var startTime = new Date();
+      var startSeconds = startTime.getSeconds();
+      return startSeconds;
+    }
+var initSecs = start();
+
+let myTimer = () => {
+      var endTime = new Date();
+      var endSeconds = endTime.getSeconds();
+      var timeDiff = endSeconds - initSecs;
+
+    document.getElementById("timer").innerHTML = timeDiff;
+    return  timeDiff;
+    /*Interval here? */
+  /* } */ 
+
+//Creates slideshow
+const slideshow = () =>{
+  let id = setInterval(frame, time);
+/*   myTimer();
+  let myVar = setInterval(myTimer ,time);
+  if(myTimer() == 1){
+    alert("TEST");
+  } */
+}
+  
+//Creates slideshow animation
 const frame = () =>{
   for (let i = 0; i<elem.length; i++){
     w.push(elem[i].offsetWidth);
@@ -57,10 +88,8 @@ const frame = () =>{
       w[i]--;
       elem[i].style.width = w[i] + "px";
       if(w[i] == 0){
-         //elem[i].style.width = imgWidth +"px";
-         w[i] = imgWidth;
-      elem[i].style.width = w[i] + "px";
-
+        w[i] = imgWidth;
+        elem[i].style.width = w[i] + "px";
       }
     }
     if(elem[i].style.left == imgWidth + "px"){ 
@@ -72,6 +101,11 @@ const frame = () =>{
     }
   }
 }
+
+//Initializes slideshow
+slideshow();
+
+
 </script>
 <?php include 'include/footer.php'; ?>
 
