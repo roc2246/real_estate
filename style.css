@@ -58,3 +58,98 @@ main{
 main>h1{
     text-align: center;
 }
+
+/*Contact Page*/
+#contact-info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#phone-adress{
+    width: 100%;
+    margin-left: 600px;
+}
+
+form {
+    width: 100%;
+    margin-right: 600px;
+}
+     
+label{
+       font-family: helvetica, arial, serif;
+     }
+     
+     input[type=email], input[type=textbox] {
+       height: 20px;
+     }
+     
+     textarea{
+       height: 125px;
+     }
+     
+     input[type=email], input[type=textbox], textarea {
+       
+       width: 100%;
+       padding: 12px;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+       margin-top: 6px;
+       margin-bottom: 16px;
+      
+     }
+     
+     input[type=submit] {
+       color: white;
+       padding: 12px 20px;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+     }
+     
+     form > h4{
+       width: 50%;
+     }
+     
+     .container {
+       padding: 20px;
+     }
+   
+     /*Mobile*/
+     @media only screen and (max-width: 414px){
+       .paragraph-main, .project-image, #ec{
+         margin-left:auto;
+         margin-right:auto;
+       }
+   
+       #aboutme>h4{
+         text-align: center;
+       }
+   
+       .project-image, #ec{
+         margin-bottom: 5px;
+       }
+   
+       .selected-option{
+         display: flex;
+         flex-direction: column;
+         margin-top: 20px;
+       }
+   
+     
+       .second-row{
+         display: flex;
+         flex-direction: column;
+     }
+   
+     .project{
+       display: flex;
+       flex-direction: column;
+     }
+   
+     form{
+       width: 75%;
+        }
+   
+     }
