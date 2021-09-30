@@ -3,7 +3,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost'){
   $servername = 'localhost';
   $username = 'root';
   $password = 'root';
-  $database = 'ecommerce';
+  $database = 'real_estate';
 } else if ($_SERVER['HTTP_HOST'] == 'roc09090.classweb.ccv.edu'){
   $servername = 'localhost';
   $username = 'roc09090';
