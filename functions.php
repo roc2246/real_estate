@@ -8,9 +8,13 @@ function getapi($table){
       if($result){
         header("Content");
         while($row = mysqli_fetch_assoc($result)){
-            $response = array($row['id'], $row['image'], $row['adress'], $row['price'], );
+            $response = array();
+             $columns =  array_keys($row);
+            for($i = 0; $i<count($row); $i++){
+                $response[$columns[$i]] = $row[$columns[$i]];
+            }
+        echo json_encode($response, JSON_PRETTY_PRINT) . "<br>"; 
         }
-        echo json_encode($response, JSON_PRETTY_PRINT); 
     }
 }
 
