@@ -11,9 +11,14 @@ function getapi($table){
             $response = array();
              $columns =  array_keys($row);
             for($i = 0; $i<count($row); $i++){
+<<<<<<< HEAD
                 $response[$columns[$i]] = $row[$columns[$i]];
             }
         echo json_encode($response, JSON_PRETTY_PRINT) . "<br>"; 
+=======
+                array_push($response, $row[$columns[$i]]);
+            }
+>>>>>>> 59be3fb7d0486a0cfe1f7b87635a275a3f32645d
         }
     }
 }
