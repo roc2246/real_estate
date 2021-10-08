@@ -14,8 +14,7 @@ function getapi($table){
                 $response[$columns[$i]] = $row[$columns[$i]];
             }
         echo json_encode($response, JSON_PRETTY_PRINT) . "<br>"; 
-        }
-    }
+
 }
 
 
