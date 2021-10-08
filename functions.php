@@ -29,7 +29,7 @@ function createForm($table){
              $columns =  array_keys($row);
              echo "<form name='uploads'  method='post' autocomplete='off'>";
             for($i = 1; $i<count($columns); $i++){
-                echo "<label>" . $columns[$i] . "</label><br>";
+                echo "<label>" . ucfirst($columns[$i]) . "</label><br>";
                 if($columns[$i] == 'image'){
                     enableUpload();
                 } else {
