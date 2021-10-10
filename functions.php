@@ -25,23 +25,29 @@ function createForm($table){
     $result = mysqli_query($connection, $sql);
       if($result){
         header("Content");
-        while($row = mysqli_fetch_assoc($result)){
-             $columns =  array_keys($row);
-             echo "<form name='uploads'  method='post' autocomplete='off'>";
-            for($i = 1; $i<count($columns); $i++){
-                echo "<label>" . ucfirst($columns[$i]) . "</label><br>";
-                if($columns[$i] == 'image'){
-                    enableUpload();
-                } else {
-                    echo "<input type='text' name='" .$columns[$i] . "'><br><br>";
-                }
-            }
-            echo "<button type='submit' value='submit' name='submit'>submit</button>";
-            echo "</form>";
-            break;
+        $row = mysqli_fetch_assoc($result);
+        if(count($row) >= 0){
+          $query = "SHOW COLUMNS FROM $table";
+          $res2 = mysqli_query($connection, $query);
+          $fieldNames = array();
+          while($row = mysqli_fetch_assoc($res2)){
+            array_push($fieldNames, $row['Field']);
+            
         }
+        echo "<form name='uploads'  method='post' autocomplete='off'>";
+        for($i = 1; $i<count($fieldNames); $i++){
+          echo "<label>" . ucfirst($fieldNames[$i]) . "</label><br>";
+          if($fieldNames[$i] == 'image'){
+            enableUpload();
+          } else {
+            echo "<input type='text' name='" .$fieldNames[$i] . "'><br><br>";
+          }
+        }
+        echo "<button type='submit' value='submit' name='submit'>submit</button>";
+        echo "</form>";
+        } 
+      }
   }
-}
 
 function enableUpload(){
     if(sys_get_temp_dir() != '/tmp'){
@@ -96,65 +102,55 @@ function enableUpload(){
         }
     }
 
-    function uploadRecord($table){
-        if(isset($_POST['submit'])) {
-        global $connection;
+//Fix this function
+function uploadRecord($table){
+  if(isset($_POST['submit'])) {
+  global $connection;
         
-        //For use in query
-        function getFieldNames($table){
-          global $connection;
-          $sql = "SELECT * FROM $table";
-          $result = mysqli_query($connection, $sql);
-          while($row = mysqli_fetch_assoc($result)){
-            $columns =  array_keys($row);
-            $fieldNames = array();
-          }
-          for($i = 1; $i<count($columns); $i++){
-           array_push($fieldNames, $columns[$i]);
-        }
-        return implode(",", $fieldNames);
+  //For use in query
+  function getFieldNames($table){
+    global $connection;
+    $sql = "SELECT * FROM $table";
+    $result = mysqli_query($connection, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+      $columns =  array_keys($row);
+      $fieldNames = array();
     }
-        //For use in query
-        function getFieldValues($table){
-          global $connection;
-          $sql = "SELECT * FROM $table";
-          $result = mysqli_query($connection, $sql);
-          while($row = mysqli_fetch_assoc($result)){
-            $columns =  array_keys($row);
-            $values = array();
-          }
-          for($i = 1; $i<count($columns); $i++){
-           if ($columns[$i] == 'image'){
-            array_push($values, '\'".$_FILES["image"]["name"]."\'');
-           }else{
-             array_push($values, '\'".$_POST["'.$columns[$i].'"]."\'');
-           }
-        }
-        return implode(",", $values);
+    for($i = 1; $i<count($columns); $i++){
+      array_push($fieldNames, $columns[$i]);
     }
-   echo getFieldValues($table) . "<br><br>";
-      //THIS WORKS
-//'".$_FILES["image"]["name"]."','".$_POST["adress"]."','".$_POST["price"]."'
+    return implode(",", $fieldNames);
+  }
 
-//COMPARE TO
-//'".$_FILES["image"]["name"]."','".$_POST["adress"]."','".$_POST["price"]."'
-//VALUES ('".$_FILES["image"]["name"]."','".$_POST["adress"]."','".$_POST["price"]."')
+  //For use in query
+  function getFieldValues($table){
+    global $connection;
+    $sql = "SELECT * FROM $table";
+    $result = mysqli_query($connection, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+      $columns =  array_keys($row);
+      $values = array();
+    }
+    for($i = 1; $i<count($columns); $i++){
+      if ($columns[$i] == 'image'){
+        array_push($values, '\'".$_FILES["image"]["name"]."\'');
+      }else{
+        array_push($values, '\'".$_POST["'.$columns[$i].'"]."\'');
+      }
+    }
+    return implode(",", $values);
+  }
 
-
-   // $striceMode = "SET SESSION sql_mode = ''";
-
-      $query = "INSERT INTO $table(" . getFieldNames($table) .") VALUES (".getFieldValues($table).")";
-            if (mysqli_query($connection, $query)) {
-              echo "New record created successfully";
-            } else {
-              echo "Error: " . $query . "<br>" . mysqli_error($connection);
-            }
-
-          }
-        }
-
-    //////////////////////
-
+  echo getFieldValues($table) . "<br><br>";
+  $query = "INSERT INTO $table(" . getFieldNames($table) .") VALUES (".getFieldValues($table).")";
+  echo $query . "<br><br>";
+  if (mysqli_query($connection, $query)) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $query . "<br><br>" . mysqli_error($connection);
+  }
+  }
+}
 
 function sendEmail($mailTo){
     if(isset($_POST['submit'])){
