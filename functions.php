@@ -18,7 +18,6 @@ function getapi($table){
   }
 }
 
-//Add to ASSETS later
 function createForm($table, $method){
   global $connection;
   $sql = "SELECT * FROM $table";
@@ -57,6 +56,7 @@ function enableUpload(){
        }
   }
 
+//Add to ASSETS later
     function uploadImage(){
         $target_dir = "uploads/";//create 'uploads' folder
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -112,34 +112,46 @@ function uploadRecord($table){
     global $connection;
     $sql = "SELECT * FROM $table";
     $result = mysqli_query($connection, $sql);
-    while($row = mysqli_fetch_assoc($result)){
-      $columns =  array_keys($row);
+    $row = mysqli_fetch_assoc($result);
+    if(count($row) >= 0){
+      $query = "SHOW COLUMNS FROM $table";
+      $res2 = mysqli_query($connection, $query);
       $fieldNames = array();
-    }
-    for($i = 1; $i<count($columns); $i++){
-      array_push($fieldNames, $columns[$i]);
+      while($row = mysqli_fetch_assoc($res2)){
+        if ($row['Field'] == 'id'){
+          continue;
+        }else{
+          array_push($fieldNames, $row['Field']);
+        }
     }
     return implode(",", $fieldNames);
   }
+}
 
   //For use in query
   function getFieldValues($table){
     global $connection;
     $sql = "SELECT * FROM $table";
     $result = mysqli_query($connection, $sql);
-    while($row = mysqli_fetch_assoc($result)){
-      $columns =  array_keys($row);
+    $row = mysqli_fetch_assoc($result);
+    if(count($row) >= 0){
+      $query = "SHOW COLUMNS FROM $table";
+      $res2 = mysqli_query($connection, $query);
       $values = array();
-    }
-    for($i = 1; $i<count($columns); $i++){
-      if ($columns[$i] == 'image'){
-        array_push($values, '\'".$_FILES["image"]["name"]."\'');
-      }else{
-        array_push($values, '\'".$_POST["'.$columns[$i].'"]."\'');
-      }
+      while($row = mysqli_fetch_assoc($res2)){
+        if ($row['Field'] == 'id'){
+          continue;
+        }else{
+          if ($row['Field'] == 'image'){
+            array_push($values, '\'".$_FILES["image"]["name"]."\'');
+          }else{
+            array_push($values, '\'".$_POST["'.$row['Field'].'"]."\'');
+          }
+        }
     }
     return implode(",", $values);
   }
+}
 
   echo getFieldValues($table) . "<br><br>";
   $query = "INSERT INTO $table(" . getFieldNames($table) .") VALUES (".getFieldValues($table).")";
