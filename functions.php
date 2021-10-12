@@ -18,7 +18,7 @@ function getapi($table){
   }
 }
 
-function createForm($table, $method){
+function createForm($table, $method, $other_attributes){
   global $connection;
   $sql = "SELECT * FROM $table";
   $result = mysqli_query($connection, $sql);
@@ -33,7 +33,7 @@ function createForm($table, $method){
           array_push($fieldNames, $row['Field']);
           
       }
-      echo "<form name='uploads'  method='".$method."' autocomplete='off'>";
+      echo "<form name='uploads'  method='".$method."' autocomplete='off' $other_attributes>";
       for($i = 1; $i<count($fieldNames); $i++){
         echo "<label>" . ucfirst($fieldNames[$i]) . "</label><br>";
         if($fieldNames[$i] == 'image'){
@@ -56,9 +56,8 @@ function enableUpload(){
        }
   }
 
-//Add to ASSETS later
-    function uploadImage(){
-        $target_dir = "uploads/";//create 'uploads' folder
+    function uploadImage($folder){
+        $target_dir = "$folder/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -72,7 +71,6 @@ function enableUpload(){
         } else {
           echo "File is not an image.<br><br>";
           $uploadOk = 0;
-      
           }
         }
       
@@ -102,7 +100,15 @@ function enableUpload(){
         }
     }
 
-//Function below doesnt work when there's no records
+
+
+//Add to ASSETS later
+function checkTempLocation(){
+  if (sys_get_temp_dir() == '/tmp'){
+    echo "<h4>Sorry, image uploading is down for maintenance.</h4>";
+  }
+}
+
 function uploadRecord($table){
   if(isset($_POST['submit'])) {
   global $connection;
@@ -156,6 +162,7 @@ function uploadRecord($table){
   echo getFieldValues($table) . "<br><br>";
   $query = "INSERT INTO $table(" . getFieldNames($table) .") VALUES (".getFieldValues($table).")";
   echo $query . "<br><br>";
+  echo $_FILES["image"]["name"];
   if (mysqli_query($connection, $query)) {
     echo "New record created successfully";
   } else {
