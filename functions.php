@@ -144,31 +144,32 @@ function uploadRecord($table){
       $query = "SHOW COLUMNS FROM $table";
       $res2 = mysqli_query($connection, $query);
       $values = array();
+      $fieldNames = explode(",",getFieldNames($table));
       while($row = mysqli_fetch_assoc($res2)){
-        if ($row['Field'] == 'id'){
-          continue;
-        }else{
-          if ($row['Field'] == 'image'){
-            array_push($values, '\'".$_FILES["image"]["name"]."\'');
-          }else{
-            array_push($values, '\'".$_POST["'.$row['Field'].'"]."\'');
+       if ($row['Field'] == 'image'){
+            array_push($values, $_FILES["image"]["name"]);
           }
         }
     }
-    return implode(",", $values);
+    for($i=0; $i<count($fieldNames); $i++){
+      if($fieldNames[$i]=='image'){
+        continue;
+      }else{
+      array_push($values, $_POST[$fieldNames[$i]]);
+      }
+    }
+    $values = implode("','", $values);
+    return $values;
   }
-}
 
-  echo getFieldValues($table) . "<br><br>";
-  $query = "INSERT INTO $table(" . getFieldNames($table) .") VALUES (".getFieldValues($table).")";
-  echo $query . "<br><br>";
-  echo $_FILES["image"]["name"];
+  $query = "INSERT INTO listings(".getFieldNames($table).") VALUES ('".getFieldValues($table)."')";
   if (mysqli_query($connection, $query)) {
     echo "New record created successfully";
   } else {
-    echo "Error: " . $query . "<br><br>" . mysqli_error($connection);
+    echo "Error: " . $query . "<br><br>" . mysqli_error($connection)."<br><br>";
+
   }
-  }
+}
 }
 
 function sendEmail($mailTo){
