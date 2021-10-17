@@ -18,7 +18,8 @@ function getapi($table){
   }
 }
 
-function createForm($table, $method, $other_attributes){
+//Add to ASSETS later
+function createForm($table, $name, $method, $other_attributes){
   global $connection;
   $sql = "SELECT * FROM $table";
   $result = mysqli_query($connection, $sql);
@@ -33,7 +34,7 @@ function createForm($table, $method, $other_attributes){
           array_push($fieldNames, $row['Field']);
           
       }
-      echo "<form name='uploads'  method='".$method."' autocomplete='off' $other_attributes>";
+      echo "<form name='".$name."'  method='".$method."' autocomplete='off' $other_attributes>";
       for($i = 1; $i<count($fieldNames); $i++){
         echo "<label>" . ucfirst($fieldNames[$i]) . "</label><br>";
         if($fieldNames[$i] == 'image'){
@@ -102,12 +103,13 @@ function enableUpload(){
 
 
 
-//Add to ASSETS later
+
 function checkTempLocation(){
   if (sys_get_temp_dir() == '/tmp'){
     echo "<h4>Sorry, image uploading is down for maintenance.</h4>";
   }
 }
+///////////////////////////
 
 function uploadRecord($table){
   if(isset($_POST['submit'])) {

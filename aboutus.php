@@ -1,4 +1,4 @@
-<?php $pageTitle = 'Home'; ?>
+<?php $pageTitle = 'About Us'; ?>
 <?php include 'include/header.php';?>
 
 <main>

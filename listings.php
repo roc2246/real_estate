@@ -1,4 +1,4 @@
-<?php $pageTitle = 'Home'; ?>
+<?php $pageTitle = 'listings'; ?>
 <?php include 'include/header.php';?>
 
 <main>

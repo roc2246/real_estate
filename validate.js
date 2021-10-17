@@ -1,30 +1,33 @@
-    //////////Variables///////////////////////////////////////////
-
 //Stores the form and its textboxes
-var contact = document.contact; //Whole form
-var subject = document.contact.subject; //subject
-var emailTxtBox = document.contact.email; //Email
-var message = document.contact.message; //Message
+const contact = document.contact; //Whole form
+
+const emailTxtBox = document.contact.email; //Email
+const subject = document.contact.subject; //subject
+const message = document.contact.message; //Message
+
 
 //Sets the valid text inputs	
+const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const regexSub = /^(?!\s*$).+/;
+const regexMssg = /^(?!\s*$).+/;
 
-var regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+/////////////////Sets up the arrays with regex and textfields
+var inputs = [];
+inputs.push(emailTxtBox, subject, message);
 
-//Sets where to refresh
-var refreshTo = "contact.php";
-
-//////////Prevent and enable form submission///////////////////
+var regex = [];
+regex.push(regexEmail, regexSub, regexMssg);
 
 //Prevents form submission
-function preventSubmit() {
-	contact.setAttribute("action", "");
-	contact.setAttribute("onsubmit", "return false;");
+function preventSubmit(form) {
+	form.setAttribute("action", "");
+	form.setAttribute("onsubmit", "return false;");
 }
 
 //Enables form submission
-function enableSubmit() {
-	contact.setAttribute("action", refreshTo);
-	contact.setAttribute("onsubmit", "return true;");
+function enableSubmit(form, refreshTo) {
+	form.setAttribute("action", refreshTo);
+	form.setAttribute("onsubmit", "return true;");
 }
 
 //Displays loading message whn email is sending
@@ -42,27 +45,23 @@ function loadMssg(){
 }
 
 //////////Checks for errors upon submission///////////////////
-function submitForm () {
-	if (regexEmail.test(emailTxtBox.value) && subject.value !="" && message.value !="") {
-		loadMssg();
-		enableSubmit();
-	
-	} else if (!regexEmail.test(emailTxtBox.value)){
-		alert("Please enter a valid email address.");
-		emailTxtBox.focus();
-		emailTxtBox.select();
-		preventSubmit();
-	} else if (subject.value ==""){
-		alert("Please enter a subject.");
-		subject.focus();
-		subject.select();
-		preventSubmit();
-	}else if (message.value ==""){
-		alert("Please enter a message.");
-		message.focus();
-		message.select();
-		preventSubmit();
+function submitForm (form) {
+		for(let i = 0; i<inputs.length; i++){
+			if(regex[i].test(inputs[i].value)){
+				if(regex[i] = regexEmail && regex[inputs.length-1].test(inputs[inputs.length-1].value)){
+				  loadMssg();
+				}
+				enableSubmit(form, "contact.php");
+			}else if (!regex[i].test(inputs[i].value)){
+				alert("Please fill out a valid " + inputs[i].getAttribute("name") + ".");
+				inputs[i].focus();
+				inputs[i].select();
+				preventSubmit(form);
+			}
+		
+		}
 	}
-}
+
+
 
 
