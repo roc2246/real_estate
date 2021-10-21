@@ -46,21 +46,27 @@ function loadMssg(){
 
 //////////Checks for errors upon submission///////////////////
 function submitForm (form) {
+	function everyOne(txtValue){
 		for(let i = 0; i<inputs.length; i++){
-			if(regex[i].test(inputs[i].value)){
-				if(regex[i] = regexEmail && regex[inputs.length-1].test(inputs[inputs.length-1].value)){
-				  loadMssg();
-				}
-				enableSubmit(form, "contact.php");
-			}else if (!regex[i].test(inputs[i].value)){
-				alert("Please fill out a valid " + inputs[i].getAttribute("name") + ".");
-				inputs[i].focus();
-				inputs[i].select();
-				preventSubmit(form);
+			if(regex[i].test(txtValue.value) == true){
+		  return regex[i].test(txtValue.value);
+			} else{
+				continue;
 			}
-		
 		}
 	}
+
+	if(inputs.every(everyOne)==true){
+		if(regex.includes(regexEmail)){
+			loadMssg();
+		  }
+		  enableSubmit(form, "contact.php");
+	}else{
+		alert("Please fill out everything.");
+		preventSubmit(form);
+	}
+}
+
 
 
 
