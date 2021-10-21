@@ -1,12 +1,9 @@
-//Stores the form and its textboxes
-const contact = document.contact; //Whole form
+//Textboxes and regex for contact page
+const contact = document.contact; 
+const emailTxtBox = document.contact.email; 
+const subject = document.contact.subject;
+const message = document.contact.message; 
 
-const emailTxtBox = document.contact.email; //Email
-const subject = document.contact.subject; //subject
-const message = document.contact.message; //Message
-
-
-//Sets the valid text inputs	
 const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const regexSub = /^(?!\s*$).+/;
 const regexMssg = /^(?!\s*$).+/;
@@ -18,21 +15,13 @@ inputs.push(emailTxtBox, subject, message);
 var regex = [];
 regex.push(regexEmail, regexSub, regexMssg);
 
-//Prevents form submission
-function preventSubmit(form) {
-	form.setAttribute("action", "");
-	form.setAttribute("onsubmit", "return false;");
-}
-
-//Enables form submission
-function enableSubmit(form, refreshTo) {
-	form.setAttribute("action", refreshTo);
-	form.setAttribute("onsubmit", "return true;");
-}
+//// Put the following in the "assets" workspace ////
 
 //Displays loading message whn email is sending
 function loadMssg(){
-
+	let status = document.createElement("h4");
+	status.id="sendMssg";
+	document.getElementsByTagName("form")[0].appendChild(status);
 	if (document.readyState !== "loading") {
 		document.getElementById("sendMssg").innerHTML="Sending...";
 		} else{
@@ -45,7 +34,7 @@ function loadMssg(){
 }
 
 //////////Checks for errors upon submission///////////////////
-function submitForm (form) {
+function submitForm (form, refreshTo) {
 	function everyOne(txtValue){
 		for(let i = 0; i<inputs.length; i++){
 			if(regex[i].test(txtValue.value) == true){
@@ -60,10 +49,18 @@ function submitForm (form) {
 		if(regex.includes(regexEmail)){
 			loadMssg();
 		  }
-		  enableSubmit(form, "contact.php");
+		form.setAttribute("action", refreshTo);
+		form.setAttribute("onsubmit", "return true;");
 	}else{
-		alert("Please fill out everything.");
-		preventSubmit(form);
+		for(let i = 0; i<inputs.length; i++){
+			if(!regex[i].test(inputs[i].value)){
+		    alert("Please fill out a valid " +inputs[i].getAttribute("name")+".");
+			inputs[i].focus();
+			inputs[i].select();
+		    }
+	    }
+		form.setAttribute("action", "");
+	    form.setAttribute("onsubmit", "return false;");
 	}
 }
 

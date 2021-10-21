@@ -26,8 +26,7 @@
   <br>
   <textarea rows="15" cols="45" name="message"></textarea>
   <br>
-  <button type="submit" value="Submit" name="submit" onclick="submitForm(contact)">Submit</button>
-  <h4 id="sendMssg"></h4>
+  <button type="submit" value="Submit" name="submit" onclick="submitForm(contact, 'contact.php')">Submit</button>
   <?php 
     include 'functions.php';
     $userEmail = "riley.childs@yahoo.com";
