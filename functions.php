@@ -19,7 +19,7 @@ function getapi($table){
 }
 
 //Add to ASSETS later
-function createForm($table, $name, $method, $other_attributes){
+function createForm($table, $name, $method, $other_attributes, $formName, $refreshTo){
   global $connection;
   $sql = "SELECT * FROM $table";
   $result = mysqli_query($connection, $sql);
@@ -43,7 +43,7 @@ function createForm($table, $name, $method, $other_attributes){
           echo "<input type='text' name='" .$fieldNames[$i] . "'><br><br>";
         }
       }
-      echo "<button type='submit' value='submit' name='submit'>submit</button>";
+      echo "<button type='submit' value='submit' name='submit' onclick='submitForm(". $formName. ", ". "\"".$refreshTo."\"" .")'>submit</button>";
       echo "</form>";
       } 
     }
