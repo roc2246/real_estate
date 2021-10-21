@@ -60,10 +60,8 @@ function submitForm (form, refreshTo) {
 	}
 
 	if(inputs.every(everyOne)==true){
-		 if(typeof regexEmail != 'undefined'){
-			if(regex.includes(regexEmail)){
+		 if(typeof regexEmail != undefined){
 			loadMssg();
-			}
 		}
 		form.setAttribute("action", refreshTo);
 		form.setAttribute("onsubmit", "return true;");
