@@ -1,0 +1,26 @@
+[{
+    "id": "1",
+    "image": "5-3 ANSWERS.png",
+    "adress": "444 street",
+    "price": "2222.22"
+},{
+    "id": "2",
+    "image": "2.png",
+    "adress": "22 street",
+    "price": "444.44"
+},{
+    "id": "3",
+    "image": "4.png",
+    "adress": "222 street",
+    "price": "2222.22"
+},{
+    "id": "4",
+    "image": "black_snow.jpg",
+    "adress": "2222 fake street",
+    "price": "2222.22"
+},{
+    "id": "5",
+    "image": "burtonCustom.jpg",
+    "adress": "22 street",
+    "price": "222.22"
+}]

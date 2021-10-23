@@ -1,24 +1,30 @@
 <?php
 include 'include/connect.php';
 
+//Add to ASSETS later
 function getapi($table){
+    header('Content-type: application/json');
     global $connection;
     $sql = "SELECT * FROM $table";
     $result = mysqli_query($connection, $sql);
       if($result){
         header("Content");
+        $json =  "[";
         while($row = mysqli_fetch_assoc($result)){
             $response = array();
              $columns =  array_keys($row);
             for($i = 0; $i<count($row); $i++){
                 $response[$columns[$i]] = $row[$columns[$i]];
             }
-        echo json_encode($response, JSON_PRETTY_PRINT) . "<br>"; 
+            $json .= json_encode($response, JSON_PRETTY_PRINT) . ",";
+            
         }
+        $json = rtrim($json, ",");
+        $json .= "]";
   }
+  echo $json;
 }
 
-//Add to ASSETS later
 function createForm($table, $name, $method, $other_attributes, $formName, $refreshTo){
   global $connection;
   $sql = "SELECT * FROM $table";
