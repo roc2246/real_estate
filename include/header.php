@@ -10,11 +10,7 @@
 </head>
 <body>
 
-<div id="flex-top">
 <header>
-  <h1>Childs</h1>
-  <h4>Realty</h4>
-</header>
+<h1>Check Out Our Listings!</h1>    
 
-<?php include 'include/navigation.php'; ?>
-</div>
+</header>

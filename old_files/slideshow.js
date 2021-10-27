@@ -30,6 +30,8 @@ function newImg (no) {
     const image = document.createElement("div");
     image.className = "changing-image";
     image.style.backgroundImage = "url(background-images/"+images[no] +")";
+    image.style.position = "absolute";
+    image.style.height = 600 + "px";
     document.getElementById("slideshow").appendChild(image);  
     elem[no].style.width = imgWidth + "px";
 }

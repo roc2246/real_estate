@@ -1,10 +1,8 @@
 <?php 
-$pageTitle = "New Property";
-include 'include/header.php';
 include 'include/connect.php';
 include 'functions.php';
 ?>
-<main>
+<div id="new-property-form">
     <h1>Upload A New Property</h1>
 <?php 
 createForm('listings', 'uploads', 'post', 
@@ -17,7 +15,6 @@ uploadRecord('listings');
 uploadImage('uploads');
 checkTempLocation();
 ?>
-</main>
+</div>
 
 <script src="validate.js"></script>
-<?php include 'include/footer.php';?>
