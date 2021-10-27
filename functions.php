@@ -1,8 +1,8 @@
 <?php
 include 'include/connect.php';
 
-//Edit later
-function deleteRows($table) {
+//Add to ASSETS later
+function deleteRows($table, $redirect) {
   global $connection;
      $ID = $_GET['id'];
      $query = "DELETE FROM $table WHERE id = '$ID' ";
@@ -11,11 +11,11 @@ function deleteRows($table) {
           die("QUERY FAILED" . mysqli_error($connection));    
         }else {
            echo "Record Deleted"; 
-       header('Refresh: 1');
+       header('location:'.  $redirect);
        }
   }
 
-//Add to ASSETS later
+
 function getapi($table){
     header('Content-type: application/json');
     global $connection;

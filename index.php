@@ -1,5 +1,9 @@
 <?php $pageTitle = 'Home'; ?>
-<?php include 'include/header.php';?>
+<?php 
+include 'include/header.php';
+include 'include/connect.php';
+global $connection;
+?>
 <main>
 <br>
 <script src="async.js"></script>
@@ -29,17 +33,14 @@ loadJSONdata('listings-api.php','GET').then(data => {
                 listings.innerHTML += "<div class='listing'>"+
                 "<img width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+
                 <?php
-                     include "include/connect.php";
-                     global $connection;
                      $sql = "SELECT * FROM listings";
                      $records = mysqli_query($connection ,$sql); 
                      while($results = mysqli_fetch_array($records))
                        {
                   ?>
-                  "<p style='display:none;'><?php echo $results['id']; ?></p>"+
                   "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                   "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
-                "<p><a href = 'delete.php?id=<?php echo $results['id'] ; ?>'>Delete</a>"+
+                "<p><a href = 'delete.php?id=" + <?php echo "data[x].id"; ?> +"'>Delete</a>"+
                   "</div>";
                   <?php
                      }

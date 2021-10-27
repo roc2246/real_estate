@@ -1,8 +1,11 @@
+//Stores location of page
+const page = window.location.pathname;
+
 /////////////////Sets up the arrays with regex and textfields
 var inputs = [];
 var regex = [];
 
-if(window.location.pathname == "/real_estate/contact.php"){
+if(page == "/real_estate/contact.php"){
   //Textboxes and regex for contact page
   const contact = document.contact; 
   const emailTxtBox = document.contact.email; 
@@ -15,7 +18,7 @@ if(window.location.pathname == "/real_estate/contact.php"){
 
   inputs.push(emailTxtBox, subject, message);
   regex.push(regexEmail, regexSub, regexMssg);
-} else if(window.location.pathname == "/real_estate/newProperty.php"){
+} else if(page == "/real_estate/newProperty.php" || page === "/real_estate/index.php"){
   //Textboxes and regex for managing available properties
   const uploads = document.uploads;
   const image = document.uploads.image;
