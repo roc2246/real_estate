@@ -7,7 +7,7 @@ include 'functions.php';
 <?php 
 createForm('listings', 'uploads', 'post', 
 "enctype='multipart/form-data'", "uploads", 
-"newProperty.php");
+"index.php");
 ?>
 <h4>Upload Status</h4>
 <?php

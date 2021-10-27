@@ -28,12 +28,23 @@ loadJSONdata('listings-api.php','GET').then(data => {
             for(let x in data){
                 listings.innerHTML += "<div class='listing'>"+
                 "<img width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+
+                <?php
+                     include "include/connect.php";
+                     global $connection;
+                     $sql = "SELECT * FROM listings";
+                     $records = mysqli_query($connection ,$sql); 
+                     while($results = mysqli_fetch_array($records))
+                       {
+                  ?>
+                  "<p style='display:none;'><?php echo $results['id']; ?></p>"+
                   "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                   "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
+                "<p><a href = 'delete.php?id=<?php echo $results['id'] ; ?>'>Delete</a>"+
                   "</div>";
+                  <?php
+                     }
+                   ?>
             }
-
-            console.log(keys);
 }); 
 
 </script>
@@ -43,11 +54,13 @@ loadJSONdata('listings-api.php','GET').then(data => {
 
   <?php include 'include/newProperty.php' ?>
   <script>
+    const listing = document.getElementsByClassName("listing");
     const form = document.getElementById("new-property-form");
     form.style.display = "none";
     document.getElementById("button").onclick = ()=>{
       form.style.display = "block";
     }
+    
   </script>
 </div>
 </main>

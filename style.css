@@ -53,3 +53,7 @@ main{
 .listing{
   margin: 40px;
 }
+
+.listing:hover{
+    border: solid;
+}
