@@ -22,12 +22,15 @@ images[3] = "4.png";
 //Stores slideshgow image containers
 const elem = document.getElementsByClassName("changing-image");
 
+//Sets height of "slideshow" div tag
+document.getElementById("slideshow").style.height = "600px";
+
 //Creates new image
-const newImg = (no) => {
+function newImg (no) {
     const image = document.createElement("div");
     image.className = "changing-image";
     image.style.backgroundImage = "url(background-images/"+images[no] +")";
-    document.getElementsByTagName("main")[0].appendChild(image);  
+    document.getElementById("slideshow").appendChild(image);  
     elem[no].style.width = imgWidth + "px";
 }
 
