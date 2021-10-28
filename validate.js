@@ -31,6 +31,17 @@ if(page == "/real_estate/contact.php"){
 
   inputs.push(image, adress, price);
   regex.push(regexImage, regexAdress, regexPrice);
+} else if(page === "/real_estate/updateListing.php"){
+	//Textboxes and regex for managing available properties
+	const uploads = document.uploads;
+	const adress = document.uploads.adress;
+	const price = document.uploads.price;
+  
+	const regexAdress = /^(?!\s*$).+/;
+	const regexPrice = /^(?!\s*$).+/;
+  
+	inputs.push(adress, price);
+	regex.push(regexAdress, regexPrice);
 }
 //// Put the following in the "assets" workspace ////
 
@@ -80,6 +91,23 @@ function submitForm (form, refreshTo) {
 	    form.setAttribute("onsubmit", "return false;");
 	}
 }
+
+//Refactor lator, especially for Assets
+  //For assigning values to textboxes
+/*   let totalOptions = document.getElementById("ID").options;
+    function option(optNo, strNo){
+    return totalOptions.item(optNo).text.split(" - ")[strNo];
+    }
+
+  function displayOption(opt){
+    document.uploads.adress.value = option(opt, 1);
+    document.uploads.price.value = option(opt, 2);
+  }
+
+
+ document.getElementById("ID").onchange = () => {
+     displayOption(document.getElementById("ID").selectedIndex);
+ } */
 
 
 
