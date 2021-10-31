@@ -1,6 +1,6 @@
 <?php 
-/* include 'include/connect.php';
-include 'functions.php'; */
+include 'include/connect.php';
+include 'functions.php';
 ?>
 <!--Form -->
 <form name='uploads'  method='post' autocomplete='off' enctype='multipart/form-data'>

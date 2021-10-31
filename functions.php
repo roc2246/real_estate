@@ -71,7 +71,7 @@ function showAllData($table) {
 } 
 
 function updateRecords($table, $redirect) {
-  if(isset($_POST['submit'])) {  
+  if(isset($_POST['submit2'])) {  
     global $connection;
     getFieldNames($table);
     getFieldValues($table);
@@ -79,11 +79,22 @@ function updateRecords($table, $redirect) {
     $fieldNames = explode(",", getFieldNames($table));
     $fieldValues = explode(",", getFieldValues($table));
 
-    $queryID = "SELECT * FROM $table";
+    /* $queryID = "SELECT * FROM $table";
     $resultID = mysqli_query($connection, $queryID);
-    $row = mysqli_fetch_assoc($resultID);
+    $IDs = array();
+    while($row = mysqli_fetch_assoc($resultID)){
+    
     $id = $row['id'];
+    array_push($IDs, $id);
+  } */
 
+  $queryID = "SELECT * FROM $table";
+  $resultID = mysqli_query($connection, $queryID);
+  $row = mysqli_fetch_assoc($resultID); 
+  $id = $row['id'];
+
+  $ID = $_POST['id'];
+  
     $query = "UPDATE $table SET ";
     for($i=0; $i<count($fieldNames); $i++){
       if($fieldNames[$i] == end($fieldNames)){
@@ -94,16 +105,16 @@ function updateRecords($table, $redirect) {
         $query .= "$fieldNames[$i] = $fieldValues[$i], ";
       }
     }
-    $query .= "WHERE id = '$id'";
+    $query .= "WHERE id = '$ID'";
 
     $result = mysqli_query($connection, $query);
       if(!$result) {
         die("QUERY FAILED" . mysqli_error($connection)); 
       }else if($id=="Select Listing:"){
         echo "Please Make a Selection.";
-        header('location:'.  $redirect);
+        //header('location:'.  $redirect);
       }else {
-        header('location:'.  $redirect);
+        //header('location:'.  $redirect);
         }   
       }
 }

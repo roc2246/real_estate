@@ -41,13 +41,14 @@ loadJSONdata('listings-api.php','GET').then(data => {
                   "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                   "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
                 "<p onclick = 'edit()' >Edit</p>"+
-                "<p><a href = 'delete.php?id=" + <?php echo "data[x].id"; ?> +"'>Delete</a>"+
+                "<p><a href = 'delete.php?id=" + data[x].id +"'>Delete</a>"+
                   "</div>";
                   <?php
                      }
                    ?>
             }
 }); 
+
 
 </script>
 <button id="button">Add New Property</button>
@@ -62,13 +63,44 @@ loadJSONdata('listings-api.php','GET').then(data => {
 <div id="myModal" class="modal">
 <div class="modal-content">
     <span class="close">&times;</span>
-  <?php include 'include/updateListing.php'; ?>
+
+    <form name='editListing'  method='post' autocomplete='off' enctype='multipart/form-data'>
+    <input type='hidden' name='id'><br><br>
+<label>Image</label><br>
+<input type='file' name='image'><br><br>
+<label>Adress</label><br>
+<input type='text' name='adress'><br><br>
+<label>Price</label><br>
+<input type='text' name='price'><br><br>
+
+<button type='submit' value='submit' name='submit2' onclick='/* submitForm(uploads, "index.php") */'>submit</button></form>
+<?php 
+updateRecords('listings', 'index.php');
+?>
+
+<script>
+loadJSONdata('listings-api.php','GET').then(data => {
+  for(let i=0; i<data.length; i++){  
+    const listing = document.getElementsByClassName("listing");
+    console.log(listing);
+    listing[i].addEventListener("click", ()=>{
+    document.editListing.id.value = data[i].id;
+    document.editListing.adress.value = data[i].adress;
+    document.editListing.price.value = data[i].price;
+    
+    });
+  }
+});
+
+
+
+</script>
+
 </div>
  
 </div>
 
 <script>
-    const listing = document.getElementsByClassName("listing");
     const form = document.getElementById("new-property-form");
     form.style.display = "none";
     document.getElementById("button").onclick = ()=>{
