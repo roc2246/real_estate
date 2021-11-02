@@ -1,49 +1,34 @@
 //Stores location of page
-const page = window.location.pathname;
+var page = window.location.pathname;
 
 /////////////////Sets up the arrays with regex and textfields
 var inputs = [];
 var regex = [];
 
-if(page == "/real_estate/contact.php"){
-  //Textboxes and regex for contact page
-  const contact = document.contact; 
-  const emailTxtBox = document.contact.email; 
-  const subject = document.contact.subject;
-  const message = document.contact.message; 
 
-  const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const regexSub = /^(?!\s*$).+/;
-  const regexMssg = /^(?!\s*$).+/;
+//Textboxes and regex for managing available properties
+var uploads = document.uploads;
+var editListing = document.editListing;
 
-  inputs.push(emailTxtBox, subject, message);
-  regex.push(regexEmail, regexSub, regexMssg);
-} else if(page == "/real_estate/newProperty.php" || page === "/real_estate/index.php"){
-  //Textboxes and regex for managing available properties
-  const uploads = document.uploads;
-  const image = document.uploads.image;
-  const adress = document.uploads.adress;
-  const price = document.uploads.price;
+function txtBoxes(form){
+	var image = form.image;
+	var adress = form.adress;
+	var price = form.price;
 
-  const regexImage = /^(?!\s*$).+/;
-  const regexAdress = /^(?!\s*$).+/;
-  const regexPrice = /^(?!\s*$).+/;
+	inputs.push(image, adress, price);
+	return inputs;
 
-  inputs.push(image, adress, price);
-  regex.push(regexImage, regexAdress, regexPrice);
-} else if(page === "/real_estate/updateListing.php"){
-	//Textboxes and regex for managing available properties
-	const uploads = document.uploads;
-	const adress = document.uploads.adress;
-	const price = document.uploads.price;
-  
-	const regexAdress = /^(?!\s*$).+/;
-	const regexPrice = /^(?!\s*$).+/;
-  
-	inputs.push(adress, price);
-	regex.push(regexAdress, regexPrice);
 }
-//// Put the following in the "assets" workspace ////
+
+
+var regexImage = /^(?!\s*$).+/;
+var regexAdress = /^(?!\s*$).+/;
+var regexPrice = /^(?!\s*$).+/;
+
+
+
+regex.push(regexImage, regexAdress, regexPrice);
+
 
 //Displays loading message whn email is sending
 function loadMssg(){
@@ -63,6 +48,7 @@ function loadMssg(){
 
 //////////Checks for errors upon submission///////////////////
 function submitForm (form, refreshTo) {
+	txtBoxes(form);
 	function everyOne(txtValue){
 		for(let i = 0; i<inputs.length; i++){
 			if(regex[i].test(txtValue.value) == true){
@@ -89,25 +75,10 @@ function submitForm (form, refreshTo) {
 	    }
 		form.setAttribute("action", "");
 	    form.setAttribute("onsubmit", "return false;");
+		inputs = [];
 	}
+	
 }
-
-//Refactor lator, especially for Assets
-  //For assigning values to textboxes
-/*   let totalOptions = document.getElementById("ID").options;
-    function option(optNo, strNo){
-    return totalOptions.item(optNo).text.split(" - ")[strNo];
-    }
-
-  function displayOption(opt){
-    document.uploads.adress.value = option(opt, 1);
-    document.uploads.price.value = option(opt, 2);
-  }
-
-
- document.getElementById("ID").onchange = () => {
-     displayOption(document.getElementById("ID").selectedIndex);
- } */
 
 
 

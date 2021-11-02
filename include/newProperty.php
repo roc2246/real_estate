@@ -17,4 +17,3 @@ checkTempLocation();
 ?>
 </div>
 
-<!-- <script src="validate.js"></script> -->

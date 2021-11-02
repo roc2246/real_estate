@@ -1,9 +1,26 @@
-<?php $pageTitle = 'Home'; ?>
 <?php 
-include 'include/header.php';
 include 'include/connect.php';
 global $connection;
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="#">
+    <title>Childs Realty</title>
+</head>
+<body>
+
+<header>
+<h1>Check Out Our Listings!</h1>    
+
+</header>
+
+
 <main>
 <br>
 <script src="async.js"></script>
@@ -63,26 +80,13 @@ loadJSONdata('listings-api.php','GET').then(data => {
 <div id="myModal" class="modal">
 <div class="modal-content">
     <span class="close">&times;</span>
-
-    <form name='editListing'  method='post' autocomplete='off' enctype='multipart/form-data'>
-    <input type='hidden' name='id'><br><br>
-<label>Image</label><br>
-<input type='file' name='image'><br><br>
-<label>Adress</label><br>
-<input type='text' name='adress'><br><br>
-<label>Price</label><br>
-<input type='text' name='price'><br><br>
-
-<button type='submit' value='submit' name='submit2' onclick='/* submitForm(uploads, "index.php") */'>submit</button></form>
-<?php 
-updateRecords('listings', 'index.php');
-?>
+    <?php include 'include/updateListing.php'?>
+ 
 
 <script>
 loadJSONdata('listings-api.php','GET').then(data => {
   for(let i=0; i<data.length; i++){  
     const listing = document.getElementsByClassName("listing");
-    console.log(listing);
     listing[i].addEventListener("click", ()=>{
     document.editListing.id.value = data[i].id;
     document.editListing.adress.value = data[i].adress;
@@ -136,8 +140,10 @@ window.onclick = function(event) {
 
 </main>
 
-
-<?php include 'include/footer.php'; ?>
+<footer>
+  <!--Insert Footer Here-->
+</footer>
+<script src="validate.js"></script>
 
 </body>
 </html>
