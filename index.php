@@ -109,6 +109,11 @@ checkTempLocation();
 </div>
 
 <script>
+  //Prevents A new listing from being creaqted upon submission
+  if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+
   //For use with 'new property' form
   const form = document.getElementById("new-property-form");
   const openNewProperty = document.getElementById("open-new-property");
