@@ -79,14 +79,6 @@ function updateRecords($table, $redirect) {
     $fieldNames = explode(",", getFieldNames($table));
     $fieldValues = explode(",", getFieldValues($table));
 
-    /* $queryID = "SELECT * FROM $table";
-    $resultID = mysqli_query($connection, $queryID);
-    $IDs = array();
-    while($row = mysqli_fetch_assoc($resultID)){
-    
-    $id = $row['id'];
-    array_push($IDs, $id);
-  } */
 
   $queryID = "SELECT * FROM $table";
   $resultID = mysqli_query($connection, $queryID);

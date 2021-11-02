@@ -60,7 +60,7 @@ main{
 
 
 
-
+/*'edit listing' popup window*/
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
