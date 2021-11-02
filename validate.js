@@ -60,7 +60,7 @@ function submitForm (form, refreshTo) {
 	}
 
 	if(inputs.every(everyOne)==true){
-		 if(typeof regexEmail != undefined){
+		 if(typeof regexEmail !== 'undefined'){
 			loadMssg();
 		}
 		form.setAttribute("action", refreshTo);

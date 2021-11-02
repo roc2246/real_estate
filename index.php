@@ -45,6 +45,8 @@ global $connection;
       ObjectKey(data);
 
       const listings = document.getElementById("listings");
+
+      
           
       for(let x in data){
         listings.innerHTML += "<div class='listing'>"+
@@ -59,7 +61,7 @@ global $connection;
                               "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                               "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
                               "<p style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
-                              "<p><a href = 'delete.php?id=" + data[x].id +"'>Delete</a>"+
+                              "<p style='cursor: pointer;' onclick='youSure("+data[x].id+");'>Delete</p>"+
                               "</div>";
                               <?php
                                 }
@@ -109,6 +111,13 @@ checkTempLocation();
 </div>
 
 <script>
+  function youSure(url){
+    const confirmBox = confirm("Are you sure you want to delete this listing?");
+      if (confirmBox==true){
+        location.replace('delete.php?id=' + url);
+      }
+  }
+
   //Prevents A new listing from being creaqted upon submission
   if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
