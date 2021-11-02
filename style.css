@@ -84,15 +84,15 @@ main{
   }
   
   /* The Close Button */
-  .close {
+  .close, #close-new-property {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
   }
   
-  .close:hover,
-  .close:focus {
+  .close, #close-new-property:hover,
+  .close, #close-new-property:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;

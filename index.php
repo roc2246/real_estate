@@ -65,7 +65,7 @@ global $connection;
        }
    }); 
 </script>
-<button id="button">Add New Property</button>
+<button id="open-new-property">Add New Property</button>
 
 <div id="new-property">
 
@@ -96,9 +96,16 @@ global $connection;
 <script>
   //For use with 'new property' form
   const form = document.getElementById("new-property-form");
-    form.style.display = "none";
-    document.getElementById("button").onclick = ()=>{
+  const openNewProperty = document.getElementById("open-new-property");
+  const span2 = document.getElementById("close-new-property");
+  form.style.display = "none";
+  openNewProperty.onclick = ()=>{
       form.style.display = "block";
+      openNewProperty.style.display = "none";
+      }
+  span2.onclick =()=> {
+    form.style.display = "none";
+    openNewProperty.style.display = "block";
   }
 
   //For use with 'edit listing' popup window

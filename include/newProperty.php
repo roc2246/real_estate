@@ -3,6 +3,7 @@ include 'include/connect.php';
 include 'functions.php';
 ?>
 <div id="new-property-form">
+<span id="close-new-property" >&times;</span>
     <h1>Upload A New Property</h1>
 <?php 
 createForm('listings', 'uploads', 'post', 
