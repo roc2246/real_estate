@@ -2,6 +2,8 @@
 include 'include/connect.php';
 global $connection;
 
+//Add all to ASSETS later
+
 //Callback functions for CRUD operations
 function getFieldNames($table){
   global $connection;
@@ -51,6 +53,8 @@ function getFieldValues($table){
 }
 /////////////////////////////////////////////////////
 
+////////////////////////CRUD Operations///////////////////////////////////
+//Create
 function uploadRecord($table){
   if(isset($_POST['submit'])) {
   global $connection;
@@ -62,7 +66,32 @@ function uploadRecord($table){
   }
   }
 }
-  
+
+//Read
+function getapi($table){
+    header('Content-type: application/json');
+    global $connection;
+    $sql = "SELECT * FROM $table";
+    $result = mysqli_query($connection, $sql);
+      if($result){
+        header("Content");
+        $json =  "[";
+        while($row = mysqli_fetch_assoc($result)){
+            $response = array();
+             $columns =  array_keys($row);
+            for($i = 0; $i<count($row); $i++){
+                $response[$columns[$i]] = $row[$columns[$i]];
+            }
+            $json .= json_encode($response, JSON_PRETTY_PRINT) . ",";
+            
+        }
+        $json = rtrim($json, ",");
+        $json .= "]";
+  }
+  echo $json;
+}
+
+//Update  
 function updateRecords($table, $redirect) {
   if(isset($_POST['submit2'])) {  
     global $connection;
@@ -95,7 +124,7 @@ function updateRecords($table, $redirect) {
     }   
 }
   
-  
+//Delete 
 function deleteRows($table, $redirect) {
   global $connection;
   $ID = $_GET['id'];
@@ -108,33 +137,10 @@ function deleteRows($table, $redirect) {
       header('location:'.  $redirect);
     }
 }
-  
-  
-  function getapi($table){
-      header('Content-type: application/json');
-      global $connection;
-      $sql = "SELECT * FROM $table";
-      $result = mysqli_query($connection, $sql);
-        if($result){
-          header("Content");
-          $json =  "[";
-          while($row = mysqli_fetch_assoc($result)){
-              $response = array();
-               $columns =  array_keys($row);
-              for($i = 0; $i<count($row); $i++){
-                  $response[$columns[$i]] = $row[$columns[$i]];
-              }
-              $json .= json_encode($response, JSON_PRETTY_PRINT) . ",";
-              
-          }
-          $json = rtrim($json, ",");
-          $json .= "]";
-    }
-    echo $json;
-  }
-  
+/////////////////////////////////////
 
 
+//Creating A New Form based on database design
   //Callback for createForm()
   function enableUpload(){
     if(sys_get_temp_dir() != '/tmp'){
@@ -174,7 +180,6 @@ function deleteRows($table, $redirect) {
       }else{
           echo "<h1>ERROR</h1>";
       }
-
   }
 
 ?>
