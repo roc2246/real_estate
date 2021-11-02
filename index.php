@@ -1,6 +1,7 @@
 <?php 
 include 'include/connect.php';
 include 'include/phpCRUD.php';
+include 'include/images.php';
 global $connection;
 ?>
 
