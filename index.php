@@ -60,8 +60,8 @@ global $connection;
                               ?>
                               "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                               "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
-                              "<p style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
-                              "<p style='cursor: pointer;' onclick='youSure("+data[x].id+");'>Delete</p>"+
+                              "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
+                              "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick='youSure("+data[x].id+");'>Delete</p>"+
                               "</div>";
                               <?php
                                 }
