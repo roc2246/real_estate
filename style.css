@@ -2,7 +2,14 @@
 h1{
   text-align: center;
 }
+body{
+  background-color: #007155;
+}
 
+h1{
+  color: #FFD416 ;
+  text-shadow: 2px 2px #FF0000;
+}
 
 /*Header*/
 header>h1{
@@ -48,17 +55,111 @@ main{
 #listings{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+    justify-content: center;
 }
 
 .listing{
   margin: 40px;
+  padding: 20px;
+  border: solid;
+  border-color: black;
+  background-color:  #B2D23E;
+  border-radius: 5%;
 }
 
-.listing:hover{
+.listing-photo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.listing-manage{
+  text-align: center;
+  font-weight: bolder;
+
+}
+
+.listing:hover, button:hover{
     border: solid;
+  border-color:  #90D4ED ;
+
 }
 
+p.info{
+  font-size: 18px;
+  font-weight: 525;
+  color: #251403;
+}
 
+.key{
+  font-weight: bolder;
+
+}
+
+button{
+  background-color: #FFD416 ;
+  padding: 10px;
+
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+
+
+}
+
+/*Forms*/
+#new-property{
+  border-top: solid;
+}
+
+#new-property-upper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#new-property-upper>h1{
+  order: 1;
+  margin:10px;
+}
+
+#new-property-upper>span{
+  order: 2;
+  margin:10px;
+}
+
+#new-property-center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#new-property-center>form{
+  order: 1;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+#new-property-center>h4{
+  order: 1;
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+label, h4{
+  color: #ffe77e;
+}
+
+input[type=file]{
+  background-color: white;
+}
+
+input[type=text]{
+  width: 247px;
+}
 
 /*'edit listing' popup window*/
 .modal {
@@ -80,8 +181,16 @@ main{
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 250px; /* Could be more or less, depending on screen size */
+   
+    border: solid;
+    background-color: #007155;
+    border-color: black;
+  border-radius: 1%;
+
   }
+
+  
   
   /* The Close Button */
   .close, #close-new-property {

@@ -45,19 +45,17 @@ global $connection;
       ObjectKey(data);
 
       const listings = document.getElementById("listings");
-
-      
-          
+   
       for(let x in data){
         if(typeof data[x] == 'undefined'){
           listings.innerHTML = '';
         }else{
         listings.innerHTML += "<div class='listing'>"+
-                              "<img width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+                   
-                              "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
-                              "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
-                              "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
-                              "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick='youSure("+data[x].id+");'>Delete</p>"+
+                              "<img class='listing-photo' width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+                   
+                              "<p class='info'>"+ "<span class='key'>"+keys[0]+"</span>"+": " + data[x].adress+ "</p>" +
+                              "<p class='info'>"+  "<span class='key'>"+keys[1] +"</span>"+": $" + data[x].price+ "</p>"+
+                              "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
+                              "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick='youSure("+data[x].id+");'>Delete</p>"+
                               "</div>";                 
        }
       }
@@ -67,21 +65,25 @@ global $connection;
 
 <div id="new-property">
 
-<div id="new-property-form">
-<span id="close-new-property" >&times;</span>
-    <h1>Upload A New Property</h1>
-<?php 
-createForm('listings', 'uploads', 'post', 
-"enctype='multipart/form-data'", "uploads", 
-"index.php");
-?>
-<h4>Upload Status</h4>
-<?php
-uploadRecord('listings');
-uploadImage('uploads');
-checkTempLocation();
-?>
- 
+  <div id="new-property-form">
+    <div id="new-property-upper">
+      <span id="close-new-property" >&times;</span>
+      <h1>Upload A New Property</h1>
+    </div>
+    <div id="new-property-center">
+      <form name='uploads'  method='post' autocomplete='off' enctype='multipart/form-data'>
+      <label>Image</label><br>
+        <input type='file' name='image'><br><br>
+      <label>Adress</label><br>
+        <input type='text' name='adress'><br><br>
+      <label>Price</label><br>
+          <input type='text' name='price'><br><br>
+      <button class='center-btn' type='submit' value='submit' name='submit' onclick='submitForm(uploads, "index.php")'>submit</button>
+    </form>
+  <h4>Upload Status</h4>
+  <?php uploadRecord('listings'); uploadImage('uploads'); checkTempLocation(); ?>
+ </div>
+  </div>
 </div>
 
 <!--For Updating Listings-->
@@ -105,6 +107,7 @@ checkTempLocation();
 </div>
 
 <script>
+  //Pulls up a confirm box if the delete button is clicked
   function youSure(url){
     const confirmBox = confirm("Are you sure you want to delete this listing?");
       if (confirmBox==true){

@@ -60,7 +60,7 @@ function uploadRecord($table){
   global $connection;
   $query = "INSERT INTO $table(".getFieldNames($table).") VALUES ('".getFieldValues($table)."')";
   if (mysqli_query($connection, $query)) {
-    echo "New record created successfully";
+    /* echo "New record created successfully"; */
   } else {
     echo "Error: " . $query . "<br><br>" . mysqli_error($connection)."<br><br>";
   }

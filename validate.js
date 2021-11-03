@@ -1,3 +1,5 @@
+//Add to ASSETS later
+
 //Stores location of page
 var page = window.location.pathname;
 
@@ -6,7 +8,7 @@ var inputs = [];
 var regex = [];
 
 
-//Textboxes and regex for managing available properties
+//For Assigning Form, Input, and Regex variables
 var uploads = document.uploads;
 var editListing = document.editListing;
 
@@ -20,14 +22,15 @@ function txtBoxes(form){
 
 }
 
+function regexAssign(){
+	var regexImage = /^(?!\s*$).+/;
+	var regexAdress = /^(?!\s*$).+/;
+	var regexPrice = /^(?!\s*$).+/;
+	
+	regex.push(regexImage, regexAdress, regexPrice);
+	return regex;
+}
 
-var regexImage = /^(?!\s*$).+/;
-var regexAdress = /^(?!\s*$).+/;
-var regexPrice = /^(?!\s*$).+/;
-
-
-
-regex.push(regexImage, regexAdress, regexPrice);
 
 
 //Displays loading message whn email is sending
@@ -49,6 +52,7 @@ function loadMssg(){
 //////////Checks for errors upon submission///////////////////
 function submitForm (form, refreshTo) {
 	txtBoxes(form);
+	regexAssign();
 	function everyOne(txtValue){
 		for(let i = 0; i<inputs.length; i++){
 			if(regex[i].test(txtValue.value) == true){
@@ -76,6 +80,7 @@ function submitForm (form, refreshTo) {
 		form.setAttribute("action", "");
 	    form.setAttribute("onsubmit", "return false;");
 		inputs = [];
+		regex = [];
 	}
 	
 }
