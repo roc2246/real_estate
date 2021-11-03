@@ -23,7 +23,7 @@ function txtBoxes(form){
 }
 
 function regexAssign(){
-	var regexImage = /^(?!\s*$).+/;
+	var regexImage = /^.*\.(jpg|jpeg|gif|JPG|png|PNG)$/;
 	var regexAdress = /^(?!\s*$).+/;
 	var regexPrice = /^(?!\s*$).+/;
 	
@@ -51,19 +51,22 @@ function loadMssg(){
 
 //////////Checks for errors upon submission///////////////////
 function submitForm (form, refreshTo) {
+	var regexTest = [];
 	txtBoxes(form);
 	regexAssign();
-	function everyOne(txtValue){
+	function everyOne(){
 		for(let i = 0; i<inputs.length; i++){
-			if(regex[i].test(txtValue.value) == true){
-		  return regex[i].test(txtValue.value);
+			if(regex[i].test(inputs[i].value) == true){
+		  regexTest.push(regex[i].test(inputs[i].value));
 			} else{
 				continue;
 			}
 		}
 	}
 
-	if(inputs.every(everyOne)==true){
+    everyOne();
+
+	if(regexTest.length == inputs.length){
 		 if(typeof regexEmail !== 'undefined'){
 			loadMssg();
 		}
