@@ -49,24 +49,18 @@ global $connection;
       
           
       for(let x in data){
+        if(typeof data[x] == 'undefined'){
+          listings.innerHTML = '';
+        }else{
         listings.innerHTML += "<div class='listing'>"+
-                              "<img width='100px' height='100px' src='uploads/" +
-                              data[x].image + 
-                              "'><br>"+
-                              <?php
-                                $sql = "SELECT * FROM listings";
-                                $records = mysqli_query($connection ,$sql); 
-                                while($results = mysqli_fetch_array($records)){
-                              ?>
+                              "<img width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+                   
                               "<p>"+ keys[0]+": " + data[x].adress+ "</p>" +
                               "<p>"+ keys[1] +": $" + data[x].price+ "</p>"+
                               "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
                               "<p onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick='youSure("+data[x].id+");'>Delete</p>"+
-                              "</div>";
-                              <?php
-                                }
-                              ?>
+                              "</div>";                 
        }
+      }
    }); 
 </script>
 <button id="open-new-property">Add New Property</button>
