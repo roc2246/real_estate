@@ -90,7 +90,16 @@ global $connection;
 <div id="update-listing" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <?php include 'include/updateListing.php'?>
+    <form name='editListing'  method='post' autocomplete='off' enctype='multipart/form-data'>
+    <input type='text' name='id'><br>
+    <label>Image</label><br>
+    <input type='file' name='image'><br><br>
+    <label>Adress</label><br>
+    <input type='text' name='adress'><br><br>
+    <label>Price</label><br>
+    <input type='text' name='price'><br><br>
+    <button type='submit' value='submit' name='submit2' onclick='submitForm(editListing, "index.php")'>submit</button></form>
+    <?php updateRecords('listings', 'index.php');?>
     <script>
     loadJSONdata('listings-api.php','GET').then(data => {
       for(let i=0; i<data.length; i++){  
