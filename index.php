@@ -73,7 +73,7 @@ global $connection;
     <div id="new-property-center">
       <form name='uploads'  method='post' autocomplete='off' enctype='multipart/form-data'>
       <label>Image</label><br>
-        <input type='file' name='image'><br><br>
+        <?php enableUpload();?>
       <label>Adress</label><br>
         <input type='text' name='adress'><br><br>
       <label>Price</label><br>
@@ -91,15 +91,15 @@ global $connection;
   <div class="modal-content">
     <span class="close">&times;</span>
     <form name='editListing'  method='post' autocomplete='off' enctype='multipart/form-data'>
-    <input type='text' name='id'><br>
+      <input type='text' name='id' hidden><br>
     <label>Image</label><br>
-    <input type='file' name='image'><br><br>
+      <?php enableUpload();?>
     <label>Adress</label><br>
-    <input type='text' name='adress'><br><br>
+      <input type='text' name='adress'><br><br>
     <label>Price</label><br>
-    <input type='text' name='price'><br><br>
+      <input type='text' name='price'><br><br>
     <button type='submit' value='submit' name='submit2' onclick='submitForm(editListing, "index.php")'>submit</button></form>
-    <?php updateRecords('listings', 'index.php');?>
+    <?php updateRecords('listings', 'index.php'); checkTempLocation();?>
     <script>
     loadJSONdata('listings-api.php','GET').then(data => {
       for(let i=0; i<data.length; i++){  
