@@ -51,5 +51,14 @@ function checkTempLocation(){
       echo "<h4>Sorry, image uploading is down for maintenance.</h4>";
     }
   }
+
+  //Callback for createForm(), located in phpCRUD.php
+  function enableUpload(){
+    if(sys_get_temp_dir() != '/tmp'){
+      echo "<input type='file' name='image'><br><br>";
+       } else {
+      echo "<input type='file' name='image' disabled><br><br>";
+       }
+  }
   
 ?>

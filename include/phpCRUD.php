@@ -2,8 +2,6 @@
 include 'include/connect.php';
 global $connection;
 
-//Add all to ASSETS later
-
 //Callback functions for CRUD operations
 function getFieldNames($table){
   global $connection;
@@ -141,14 +139,7 @@ function deleteRows($table, $redirect) {
 
 
 //Creating A New Form based on database design
-  //Callback for createForm()
-  function enableUpload(){
-    if(sys_get_temp_dir() != '/tmp'){
-      echo "<input type='file' name='image'><br><br>";
-       } else {
-      echo "<input type='file' name='image' disabled><br><br>";
-       }
-  }
+  
 
   function createForm($table, $name, $method, $other_attributes, $formName, $refreshTo){
     global $connection;
@@ -169,7 +160,7 @@ function deleteRows($table, $redirect) {
         for($i = 1; $i<count($fieldNames); $i++){
           echo "<label>" . ucfirst($fieldNames[$i]) . "</label><br>";
           if($fieldNames[$i] == 'image'){
-            enableUpload();
+            enableUpload();//Located in images.php
           } else {
             echo "<input type='text' name='" .$fieldNames[$i] . "'><br><br>";
           }

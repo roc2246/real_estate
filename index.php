@@ -24,6 +24,7 @@ global $connection;
 
 <main>
   <div id="listings">
+    <!--Listings data will go here once the API is fetched-->
   </div>
   <script>
     loadJSONdata('listings-api.php','GET').then(data => {
@@ -63,8 +64,8 @@ global $connection;
 </script>
 <button id="open-new-property">Add New Property</button>
 
+<!--Add new property form -->
 <div id="new-property">
-
   <div id="new-property-form">
     <div id="new-property-upper">
       <span id="close-new-property" >&times;</span>
