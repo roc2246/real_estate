@@ -9,9 +9,9 @@ if ($_SERVER['HTTP_HOST'] == 'localhost'){
   $username = 'roc09090';
   $password = 'je5umyju5';
   $database = 'roc09090_wordpress';
-} else {
-  $servername = 'localhost';
-  $username = 'rChilds';
+} else if($_SERVER['HTTP_HOST'] == 'wh963069.ispot.cc'){
+  $servername = 'wh963069.ispot.cc';
+  $username = 'childswe_realEstate';
   $password = 'XXSBVxuc';
   $database = 'childswe_realEstate';
 }
