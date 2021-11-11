@@ -10,10 +10,10 @@ if ($_SERVER['HTTP_HOST'] == 'localhost'){
   $password = 'je5umyju5';
   $database = 'roc09090_wordpress';
 } else {
-  $servername = '';
-  $username = '';
-  $password = '';
-  $database = '';
+  $servername = 'localhost';
+  $username = 'rChilds';
+  $password = 'XXSBVxuc';
+  $database = 'childswe_realEstate';
 }
 
 
