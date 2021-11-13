@@ -46,19 +46,20 @@ function uploadImage($folder){
     }
 }
 
-function checkTempLocation(){
-    if (sys_get_temp_dir() == '/tmp'){
-      echo "<h4>Sorry, image uploading is down for maintenance.</h4>";
-    }
-  }
 
-  //Callback for createForm(), located in phpCRUD.php
-  function enableUpload(){
-    if(sys_get_temp_dir() != '/tmp'){
-      echo "<input type='file' name='image'><br><br>";
-       } else {
-      echo "<input type='file' name='image' disabled><br><br>";
-       }
+function checkTempLocation(){
+  if (!file_exists(sys_get_temp_dir())){
+    echo "<h4>Sorry, image uploading is down for maintenance.</h4>";
   }
+}
+
+//Callback for createForm(), located in phpCRUD.php
+function enableUpload(){
+  if(file_exists(sys_get_temp_dir())){
+    echo "<input type='file' name='image'><br><br>";
+    } else {
+    echo "<input type='file' name='image' disabled><br><br>";
+     }
+}
   
 ?>
