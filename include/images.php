@@ -1,5 +1,5 @@
 <?php 
-include 'include.connect.pgp';
+include 'include/connect.php';
 
 //IMAGES
 function uploadImage($folder){
