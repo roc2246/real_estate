@@ -52,7 +52,7 @@ global $connection;
           listings.innerHTML = '';
         }else{
         listings.innerHTML += "<div class='listing'>"+
-                              "<img class='listing-photo' width='100px' height='100px' src='uploads/" + data[x].image + "'><br>"+                   
+                              "<img class='listing-photo' width='100' height='100' src='uploads/" + data[x].image + "' alt='"+data[x].adress+"'><br>"+                   
                               "<p class='info'>"+ "<span class='key'>"+keys[0]+"</span>"+": " + data[x].adress+ "</p>" +
                               "<p class='info'>"+  "<span class='key'>"+keys[1] +"</span>"+": $" + data[x].price+ "</p>"+
                               "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
