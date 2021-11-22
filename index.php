@@ -1,7 +1,6 @@
 <?php 
 /** 
  * A CRUD app for a self-coded real estate api
- * and logging out.
  * 
  * PHP version 7.4
  * 
@@ -12,9 +11,9 @@
  * @link     http://wh963069.ispot.cc/projects/real_estate/index.php
  */
 
-include 'include/connect.php';
-include 'include/phpCRUD.php';
-include 'include/images.php';
+require 'include/connect.php';
+require 'include/phpCRUD.php';
+require 'include/images.php';
 global $connection;
 ?>
 
@@ -65,12 +64,19 @@ global $connection;
           listings.innerHTML = '';
         }else{
         listings.innerHTML += "<div class='listing'>"+
-                              "<img class='listing-photo' width='100' height='100' src='uploads/" + data[x].image + "' alt='"+data[x].adress+"'><br>"+                   
-                              "<p class='info'>"+ "<span class='key'>"+keys[0]+"</span>"+": " + data[x].adress+ "</p>" +
-                              "<p class='info'>"+  "<span class='key'>"+keys[1] +"</span>"+": $" + data[x].price+ "</p>"+
-                              "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick = 'edit()' >Edit</p>"+
-                              "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' onclick='youSure("+data[x].id+");'>Delete</p>"+
-                              "</div>";                 
+    "<img class='listing-photo' width='100' height='100' src='uploads/" + 
+     data[x].image + "' alt='"+data[x].adress+"'><br>"+                   
+    "<p class='info'>"+ "<span class='key'>"+keys[0]+"</span>"+": " +
+     data[x].adress+ "</p>" +
+    "<p class='info'>"+  "<span class='key'>"+keys[1] +"</span>"+": $" +
+    data[x].price+ "</p>"+
+    "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  " + 
+    "onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' " + 
+    "onclick = 'edit()' >Edit</p>"+
+    "<p class='listing-manage' onMouseOver=\"this.style.color='red'\"  " + 
+    "onMouseOut=\"this.style.color='blue'\" style ='color:blue;cursor: pointer' " +
+    "onclick='youSure("+data[x].id+");'>Delete</p>"+
+    "</div>";                 
        }
       }
    }); 
@@ -85,14 +91,16 @@ global $connection;
       <h1>Upload A New Property</h1>
     </div>
     <div id="new-property-center">
-      <form name='uploads'  method='post' autocomplete='off' enctype='multipart/form-data'>
+      <form name='uploads'  method='post' autocomplete='off'
+       enctype='multipart/form-data'>
       <label>Image</label><br>
         <?php enableUpload();?>
       <label>Adress</label><br>
         <input type='text' name='adress'><br><br>
       <label>Price</label><br>
           <input type='text' name='price'><br><br>
-      <button class='center-btn' type='submit' value='submit' name='submit' onclick='submitForm(uploads, "index.php")'>submit</button>
+      <button class='center-btn' type='submit' value='submit' 
+      name='submit' onclick='submitForm(uploads, "index.php")'>submit</button>
     </form>
   <h4>Upload Status</h4>
   <?php uploadRecord('listings'); uploadImage('uploads'); checkTempLocation(); ?>
@@ -104,7 +112,8 @@ global $connection;
 <div id="update-listing" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form name='editListing'  method='post' autocomplete='off' enctype='multipart/form-data'>
+    <form name='editListing'  method='post' 
+    autocomplete='off' enctype='multipart/form-data'>
       <input type='text' name='id' hidden><br>
     <label>Image</label><br>
       <?php enableUpload();?>
@@ -112,7 +121,8 @@ global $connection;
       <input type='text' name='adress'><br><br>
     <label>Price</label><br>
       <input type='text' name='price'><br><br>
-    <button type='submit' value='submit' name='submit2' onclick='submitForm(editListing, "index.php")'>submit</button></form>
+    <button type='submit' value='submit' name='submit2'
+     onclick='submitForm(editListing, "index.php")'>submit</button></form>
     <?php updateRecords('listings', 'index.php'); checkTempLocation();?>
     <script>
     loadJSONdata('listings-api.php','GET').then(data => {
